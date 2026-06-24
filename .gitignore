@@ -32,6 +32,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
 
 # vercel
 .vercel
@@ -39,3 +45,43 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# secrets & credentials
+*.key
+*.secret
+secrets.json
+secrets.yaml
+secrets.yml
+credentials.json
+credentials.yaml
+credentials.yml
+service-account.json
+firebase-adminsdk*.json
+*-service-account.json
+
+# API keys & tokens
+*.token
+auth.json
+config.secret.js
+config.secret.ts
+
+# SSH & certificates
+*.rsa
+*.dsa
+*.ecdsa
+*.ed25519
+id_rsa
+id_dsa
+*.crt
+*.cert
+*.p12
+*.pfx
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/settings.json
+.idea/
