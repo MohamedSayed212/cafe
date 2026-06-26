@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "What are your opening hours?",
-    a: "We're open Monday to Friday from 7:00 AM to 11:00 PM, and Saturday to Sunday from 8:00 AM to midnight.",
+    a: "We're open 24 hours a day , 7 days a week.",
   },
   {
     q: "Do you offer takeaway?",
