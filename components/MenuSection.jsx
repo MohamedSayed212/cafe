@@ -28,7 +28,7 @@ export default function MenuSection() {
         {/* Preview cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
           {preview.map((product, i) => (
-            <FadeIn key={product.id} delay={i * 0.08}>
+            <FadeIn key={product.id} delay={i * 0.08} className={i >= 4 ? "hidden sm:block" : ""}>
               <div className="bg-card rounded-2xl overflow-hidden border border-text/5 shadow-sm hover:shadow-md transition-shadow h-full">
                 <div className="relative h-48">
                   <Image

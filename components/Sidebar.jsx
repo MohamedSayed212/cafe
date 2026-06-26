@@ -54,8 +54,15 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="px-3 py-5 border-t border-white/10">
+      {/* Bottom actions */}
+      <div className="px-3 py-5 border-t border-white/10 flex flex-col gap-1">
+        <Link
+          href="/"
+          target="_blank"
+          className="px-4 py-2.5 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+        >
+          Visit Website
+        </Link>
         <button
           onClick={handleLogout}
           className="w-full px-4 py-2.5 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors text-left"

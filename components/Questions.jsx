@@ -18,23 +18,15 @@ const faqs = [
     q: "Is there Wi-Fi available?",
     a: "Yes, free high-speed Wi-Fi is available for all guests. Just ask one of our baristas for the password.",
   },
-  {
-    q: "Do you have a loyalty program?",
-    a: "We do! Ask our staff about our stamp card — every 10 drinks earns you one free coffee.",
-  },
-  {
-    q: "Can I host a small private event at terra?",
-    a: "We have a cozy private corner available for small gatherings. Contact us to discuss availability and arrangements.",
-  },
 ];
 
 export default function Questions() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-24 px-6 bg-primary">
+    <section className="py-14 px-6 bg-primary">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
             FAQ
           </p>

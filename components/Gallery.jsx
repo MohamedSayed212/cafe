@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 
@@ -11,6 +13,10 @@ const images = [
 ];
 
 export default function Gallery() {
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleImages = showAll ? images : images.slice(0, 3);
+
   return (
     <section id="gallery" className="py-24 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
@@ -26,7 +32,7 @@ export default function Gallery() {
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {images.map((img, i) => (
+          {visibleImages.map((img, i) => (
             <FadeIn key={i} delay={i * 0.08} className={img.span}>
               <div className={`relative ${img.h} rounded-2xl overflow-hidden`}>
                 <Image
@@ -38,6 +44,24 @@ export default function Gallery() {
               </div>
             </FadeIn>
           ))}
+        </div>
+
+        <div className="text-center mt-10">
+          {!showAll ? (
+            <button
+              onClick={() => setShowAll(true)}
+              className="bg-primary text-white font-bold tracking-widest text-xs px-10 py-4 rounded-full hover:bg-primary/90 transition-colors"
+            >
+              SHOW MORE PHOTOS
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowAll(false)}
+              className="border border-primary text-primary font-bold tracking-widest text-xs px-10 py-4 rounded-full hover:bg-primary hover:text-white transition-colors"
+            >
+              SHOW LESS PHOTOS
+            </button>
+          )}
         </div>
       </div>
     </section>

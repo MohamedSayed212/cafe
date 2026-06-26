@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 border border-text/10 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-2 border border-text/10 rounded-2xl overflow-hidden">
           {reasons.map((reason, i) => (
             <FadeIn key={reason.number} delay={i * 0.1}>
               <div

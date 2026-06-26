@@ -60,7 +60,7 @@ export default function Navbar() {
     pathname === "/" && (active === section || (section === "home" && !active));
 
   return (
-    <nav className="sticky top-0 z-50 bg-primary text-white">
+    <nav className="sticky top-0 z-50 bg-primary text-white relative">
 
       {/* Top bar */}
       <div className="flex items-center justify-between md:grid md:grid-cols-3 px-6 md:px-10 py-4">
@@ -110,15 +110,15 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu — inside nav so it stays sticky with it */}
+      {/* Mobile menu — absolute so it overlays content instead of pushing it down */}
       {menuOpen && (
-        <div className="md:hidden border-t border-white/10 px-6 py-6 flex flex-col gap-5">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#faf8f4] border-t-2 border-accent/30 shadow-xl px-6 py-6 flex flex-col gap-5 z-50">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
               onClick={(e) => handleClick(e, link.section)}
-              className={`text-sm font-bold tracking-widest hover:text-accent transition-colors ${isActive(link.section) ? "text-accent" : ""}`}
+              className={`text-sm font-bold tracking-widest transition-colors ${isActive(link.section) ? "text-accent" : "text-primary hover:text-accent"}`}
             >
               {link.label}
             </Link>
@@ -126,7 +126,7 @@ export default function Navbar() {
           <Link
             href="/#reservation"
             onClick={(e) => handleClick(e, "reservation")}
-            className="mt-2 bg-accent text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full text-center hover:opacity-90 transition-opacity"
+            className="mt-1 bg-primary text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full text-center hover:bg-primary/90 transition-colors"
           >
             RESERVE A TABLE
           </Link>

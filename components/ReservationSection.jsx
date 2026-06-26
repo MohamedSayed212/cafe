@@ -181,7 +181,7 @@ export default function ReservationSection() {
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-3 gap-5">
+              <div className="grid grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-bold tracking-widest uppercase text-text mb-2">
                     Date
@@ -208,23 +208,24 @@ export default function ReservationSection() {
                     className="w-full border border-text/10 rounded-xl px-4 py-3 text-text text-sm bg-background focus:outline-none focus:border-accent"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-bold tracking-widest uppercase text-text mb-2">
-                    Guests
-                  </label>
-                  <select
-                    name="guests"
-                    value={form.guests}
-                    onChange={handleChange}
-                    className="w-full border border-text/10 rounded-xl px-4 py-3 text-text text-sm bg-background focus:outline-none focus:border-accent"
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                      <option key={n} value={n}>
-                        {n} {n === 1 ? "Guest" : "Guests"}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold tracking-widest uppercase text-text mb-2">
+                  Guests
+                </label>
+                <select
+                  name="guests"
+                  value={form.guests}
+                  onChange={handleChange}
+                  className="w-full border border-text/10 rounded-xl px-4 py-3 text-text text-sm bg-background focus:outline-none focus:border-accent"
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                    <option key={n} value={n}>
+                      {n} {n === 1 ? "Guest" : "Guests"}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>

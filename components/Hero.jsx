@@ -3,20 +3,20 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 export default function Hero() {
   return (
-    <section className="relative bg-primary min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative bg-primary py-14 md:py-0 md:min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-black/60" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-10 grid md:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-12 items-center">
         {/* Left — text */}
         <div className="text-white">
           <FadeIn delay={0}>
-            <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-5">
+            <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-6 md:mb-5">
               Specialty Coffee · Cairo, Egypt
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-7 md:mb-6">
               Where Every Cup
               <br />
               <span className="text-accent">Tells a Story</span>
@@ -24,7 +24,7 @@ export default function Hero() {
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-md">
+            <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10 md:mb-10 max-w-md">
               Handcrafted coffee, a warm atmosphere, and a corner of Cairo that
               feels like home. Come as a stranger, leave as a regular.
             </p>
