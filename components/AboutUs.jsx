@@ -16,7 +16,7 @@ export default function AboutUs() {
           </div>
         </FadeIn>
 
-        <FadeIn direction="left" delay={0.15}>
+        <FadeIn direction="right" delay={0.15}>
           <div>
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
               Our Story
