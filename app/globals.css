@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #faf8f4;
+  --color-primary: #2c2118;
+  --color-accent: #b88746;
+  --color-text: #222222;
+  --color-card: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 68px; /* offset for sticky navbar */
+}
+
+body {
+  background-color: #faf8f4;
+  color: #222222;
 }
