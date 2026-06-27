@@ -2,6 +2,26 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
+// Convert "HH:MM" (24h) → "H:MM AM/PM" (12h)
+function formatTime(time) {
+  if (!time) return "—";
+  const [h, m] = time.split(":");
+  const hour = parseInt(h);
+  const period = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+  return `${hour12}:${m} ${period}`;
+}
+
+// Format "YYYY-MM-DD" → "Jun 27, 2026"
+function formatDate(date) {
+  if (!date) return "—";
+  return new Date(date + "T00:00:00").toLocaleDateString("en-EG", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 // Background color for each status badge
 const statusColors = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -99,8 +119,8 @@ export default function AdminReservationsPage() {
 
                     {/* Date & time */}
                     <td className="px-5 py-4 text-text/60 hidden sm:table-cell">
-                      <p>{r.date}</p>
-                      <p className="text-xs text-text/40">{r.time}</p>
+                      <p>{formatDate(r.date)}</p>
+                      <p className="text-xs text-text/40">{formatTime(r.time)}</p>
                     </td>
 
                     {/* Number of guests */}
