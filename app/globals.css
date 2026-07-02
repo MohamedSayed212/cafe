@@ -11,9 +11,14 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 68px; /* offset for sticky navbar */
+  overflow-x: clip;
+  width: 100%;
 }
 
 body {
   background-color: #faf8f4;
   color: #222222;
+  overflow-x: clip;
+  width: 100%;
+  position: relative;
 }
