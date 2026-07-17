@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 import { supabase } from "@/lib/supabase";
 
 // Converts 24h "HH:MM" → "H:MM AM/PM" for display in the success modal
@@ -51,7 +52,9 @@ function TimePicker({ value, onChange }) {
       >
         <option value="">Hr</option>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((h) => (
-          <option key={h} value={h}>{h}</option>
+          <option key={h} value={h}>
+            {h}
+          </option>
         ))}
       </select>
 
@@ -60,8 +63,23 @@ function TimePicker({ value, onChange }) {
         onChange={(e) => emit(hour, e.target.value, period)}
         className={`${base} border-r border-text/10`}
       >
-        {["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"].map((m) => (
-          <option key={m} value={m}>{m}</option>
+        {[
+          "00",
+          "05",
+          "10",
+          "15",
+          "20",
+          "25",
+          "30",
+          "35",
+          "40",
+          "45",
+          "50",
+          "55",
+        ].map((m) => (
+          <option key={m} value={m}>
+            {m}
+          </option>
         ))}
       </select>
 
@@ -131,11 +149,17 @@ function SuccessModal({ form, onClose }) {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
 
-          <h3 className="text-2xl font-bold text-primary mb-2">You&apos;re booked!</h3>
+          <h3 className="text-2xl font-bold text-primary mb-2">
+            You&apos;re booked!
+          </h3>
           <p className="text-text/50 text-sm mb-8">
             We&apos;ve received your reservation and will confirm shortly.
           </p>
@@ -147,7 +171,10 @@ function SuccessModal({ form, onClose }) {
             <Row label="Phone" value={form.phone} />
             <Row label="Date" value={formattedDate} />
             <Row label="Time" value={to12h(form.time)} />
-            <Row label="Guests" value={`${form.guests} ${form.guests === "1" ? "Guest" : "Guests"}`} />
+            <Row
+              label="Guests"
+              value={`${form.guests} ${form.guests === "1" ? "Guest" : "Guests"}`}
+            />
             {form.notes && <Row label="Notes" value={form.notes} />}
           </div>
 
@@ -231,14 +258,16 @@ export default function ReservationSection() {
     <>
       {showModal && <SuccessModal form={form} onClose={handleClose} />}
 
-      <section id="reservation" className="py-24 px-6 bg-background">
-        <div className="max-w-2xl mx-auto">
+      <section id="reservation" className="py-14 bg-background">
+        <Container size="sm">
           <FadeIn>
             <div className="text-center mb-14">
               <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
                 Visit Us
               </p>
-              <h2 className="text-4xl font-bold text-primary">Reserve a Table</h2>
+              <h2 className="text-4xl font-bold text-primary">
+                Reserve a Table
+              </h2>
               <p className="text-text/50 mt-4 text-sm">
                 Book your spot in advance and we&apos;ll have it ready for you.
               </p>
@@ -366,7 +395,9 @@ export default function ReservationSection() {
 
               {/* Submit error */}
               {submitError && (
-                <p className="text-red-500 text-sm text-center">{submitError}</p>
+                <p className="text-red-500 text-sm text-center">
+                  {submitError}
+                </p>
               )}
 
               <button
@@ -378,7 +409,7 @@ export default function ReservationSection() {
               </button>
             </form>
           </FadeIn>
-        </div>
+        </Container>
       </section>
     </>
   );

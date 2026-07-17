@@ -2,11 +2,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Container from "@/components/Container";
 
 const navLinks = [
-  { label: "HOME",    href: "/",         section: "home" },
-  { label: "ABOUT",   href: "/#about",   section: "about" },
-  { label: "MENU",    href: "/#menu",    section: "menu" },
+  { label: "HOME", href: "/", section: "home" },
+  { label: "ABOUT", href: "/#about", section: "about" },
+  { label: "MENU", href: "/#menu", section: "menu" },
   { label: "CONTACT", href: "/#contact", section: "contact" },
 ];
 
@@ -18,24 +19,33 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Close mobile menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   // Track active section while scrolling (homepage only)
   useEffect(() => {
-    if (pathname !== "/") { setActive(null); return; }
+    if (pathname !== "/") {
+      setActive(null);
+      return;
+    }
 
     const observers = SECTION_IDS.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
       const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { rootMargin: "-40% 0px -55% 0px" }
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        { rootMargin: "-40% 0px -55% 0px" },
       );
       observer.observe(el);
       return observer;
     });
 
-    const onScroll = () => { if (window.scrollY < 80) setActive("home"); };
+    const onScroll = () => {
+      if (window.scrollY < 80) setActive("home");
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
@@ -61,10 +71,8 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-primary text-white relative">
-
       {/* Top bar */}
-      <div className="flex items-center justify-between md:grid md:grid-cols-3 px-6 md:px-10 py-4">
-
+      <Container className="flex items-center justify-between md:grid md:grid-cols-3 py-4">
         {/* Logo */}
         <Link
           href="/"
@@ -104,35 +112,42 @@ export default function Navbar() {
           className="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 ml-auto"
           aria-label="Toggle menu"
         >
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+          <span
+            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
+          />
         </button>
-      </div>
+      </Container>
 
       {/* Mobile menu — absolute so it overlays content instead of pushing it down */}
       {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#faf8f4] border-t-2 border-accent/30 shadow-xl px-6 py-6 flex flex-col gap-5 z-50">
-          {navLinks.map((link) => (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#faf8f4] border-t-2 border-accent/30 shadow-xl py-6 z-50">
+          <Container className="flex flex-col gap-5">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleClick(e, link.section)}
+                className={`text-sm font-bold tracking-widest transition-colors ${isActive(link.section) ? "text-accent" : "text-primary hover:text-accent"}`}
+              >
+                {link.label}
+              </Link>
+            ))}
             <Link
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleClick(e, link.section)}
-              className={`text-sm font-bold tracking-widest transition-colors ${isActive(link.section) ? "text-accent" : "text-primary hover:text-accent"}`}
+              href="/#reservation"
+              onClick={(e) => handleClick(e, "reservation")}
+              className="mt-1 bg-primary text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full text-center hover:bg-primary/90 transition-colors"
             >
-              {link.label}
+              RESERVE A TABLE
             </Link>
-          ))}
-          <Link
-            href="/#reservation"
-            onClick={(e) => handleClick(e, "reservation")}
-            className="mt-1 bg-primary text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full text-center hover:bg-primary/90 transition-colors"
-          >
-            RESERVE A TABLE
-          </Link>
+          </Container>
         </div>
       )}
-
     </nav>
   );
 }

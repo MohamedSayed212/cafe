@@ -1,10 +1,11 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 
 export default function AboutUs() {
   return (
-    <section id="about" className="py-24 px-6 bg-background">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-16 bg-background">
+      <Container className="grid md:grid-cols-2 gap-16 items-center">
         <FadeIn direction="right">
           <div className="relative rounded-2xl overflow-hidden h-96">
             <Image
@@ -49,7 +50,7 @@ export default function AboutUs() {
             </div>
           </div>
         </FadeIn>
-      </div>
+      </Container>
     </section>
   );
 }

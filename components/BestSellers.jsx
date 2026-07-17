@@ -1,13 +1,14 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 import { products } from "@/data/products";
 
 // Pick featured drinks by ID and assign a tag
 const FEATURED = [
-  { id: 2,  tag: "Customer Favorite" },
-  { id: 4,  tag: "Barista's Pick"    },
-  { id: 7,  tag: "House Specialty"   },
-  { id: 10, tag: "Summer Special"    },
+  { id: 2, tag: "Customer Favorite" },
+  { id: 4, tag: "Barista's Pick" },
+  { id: 7, tag: "House Specialty" },
+  { id: 10, tag: "Summer Special" },
 ];
 
 const featured = FEATURED.map(({ id, tag }) => ({
@@ -17,11 +18,10 @@ const featured = FEATURED.map(({ id, tag }) => ({
 
 export default function BestSellers() {
   return (
-    <section className="py-24 px-6 bg-primary">
-      <div className="max-w-6xl mx-auto">
-
+    <section className="py-16 bg-primary">
+      <Container>
         <FadeIn>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
               What We Brew
             </p>
@@ -33,7 +33,6 @@ export default function BestSellers() {
           {featured.map((drink, i) => (
             <FadeIn key={drink.id} delay={i * 0.1}>
               <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors h-full flex flex-col">
-
                 {/* Real product image */}
                 <div className="relative h-44 flex-shrink-0">
                   <Image
@@ -59,13 +58,11 @@ export default function BestSellers() {
                     {drink.price} EGP
                   </p>
                 </div>
-
               </div>
             </FadeIn>
           ))}
         </div>
-
-      </div>
+      </Container>
     </section>
   );
 }

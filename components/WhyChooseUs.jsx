@@ -1,5 +1,6 @@
 import { Coffee, Heart, MapPin, Users } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 
 const reasons = [
   {
@@ -30,8 +31,8 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 px-6 bg-card">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 bg-card">
+      <Container>
 
         <FadeIn>
           <div className="mb-10">
@@ -73,7 +74,7 @@ export default function WhyChooseUs() {
           ))}
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

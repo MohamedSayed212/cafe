@@ -1,12 +1,13 @@
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
+import Container from "@/components/Container";
 export default function Hero() {
   return (
-    <section className="relative bg-primary py-14 md:py-0 md:min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative bg-primary py-8 mt-[-10px] md:min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-black/60" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-12 items-center">
+      <Container className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
         {/* Left — text */}
         <div className="text-white">
           <FadeIn delay={0}>
@@ -68,7 +69,7 @@ export default function Hero() {
             </div>
           </div>
         </FadeIn>
-      </div>
+      </Container>
     </section>
   );
 }

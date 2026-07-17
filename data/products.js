@@ -1,5 +1,4 @@
 export const products = [
-  // ── Coffee ──────────────────────────────────────────────
   {
     id: 1,
     name: "Spanish Latte",

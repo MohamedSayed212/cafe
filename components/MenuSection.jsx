@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 import { products } from "@/data/products";
 
 // Hand-picked preview — one from each category to show variety
@@ -9,18 +10,20 @@ const preview = products.filter((p) => PREVIEW_IDS.includes(p.id));
 
 export default function MenuSection() {
   return (
-    <section id="menu" className="py-24 px-6 bg-background">
-      <div className="max-w-6xl mx-auto">
-
+    <section id="menu" className="py-14 bg-background">
+      <Container>
         {/* Header */}
         <FadeIn>
           <div className="text-center mb-14">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
               A Taste of What We Offer
             </p>
-            <h2 className="text-4xl font-bold text-primary mb-4">Menu Preview</h2>
+            <h2 className="text-4xl font-bold text-primary mb-4">
+              Menu Preview
+            </h2>
             <p className="text-text/50 text-sm leading-relaxed max-w-sm mx-auto">
-              A curated selection across our menu — coffee, iced drinks, desserts, and fresh bakery.
+              A curated selection across our menu — coffee, iced drinks,
+              desserts, and fresh bakery.
             </p>
           </div>
         </FadeIn>
@@ -28,7 +31,11 @@ export default function MenuSection() {
         {/* Preview cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
           {preview.map((product, i) => (
-            <FadeIn key={product.id} delay={i * 0.08} className={i >= 4 ? "hidden sm:block" : ""}>
+            <FadeIn
+              key={product.id}
+              delay={i * 0.08}
+              className={i >= 4 ? "hidden sm:block" : ""}
+            >
               <div className="bg-card rounded-2xl overflow-hidden border border-text/5 shadow-sm hover:shadow-md transition-shadow h-full">
                 <div className="relative h-48">
                   <Image
@@ -70,8 +77,7 @@ export default function MenuSection() {
             </Link>
           </div>
         </FadeIn>
-
-      </div>
+      </Container>
     </section>
   );
 }

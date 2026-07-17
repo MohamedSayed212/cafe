@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Container from "@/components/Container";
 
 const links = [
   { label: "Home", href: "/" },
@@ -9,8 +10,8 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white px-10 py-14">
-      <div className="max-w-6xl mx-auto">
+    <footer className="bg-primary text-white py-14">
+      <Container>
         <div className="grid md:grid-cols-3 gap-12 pb-10 border-b border-white/10">
           <div>
             <p className="text-xl font-bold tracking-widest mb-4">terra</p>
@@ -58,7 +59,7 @@ export default function Footer() {
         <div className="pt-8 text-center text-white/25 text-xs tracking-widest">
           © {new Date().getFullYear()} terra. All rights reserved.
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Container from "@/components/Container";
 
 const faqs = [
   {
@@ -24,8 +25,8 @@ export default function Questions() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-14 px-6 bg-primary">
-      <div className="max-w-3xl mx-auto">
+    <section className="py-14 bg-primary">
+      <Container size="md">
         <div className="text-center mb-10">
           <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
             FAQ
@@ -56,7 +57,7 @@ export default function Questions() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

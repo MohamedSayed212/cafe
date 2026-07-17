@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { products } from "@/data/products";
+import Container from "@/components/Container";
 
 const CATEGORIES = ["All", "Coffee", "Iced Coffee", "Desserts", "Bakery"];
 
@@ -36,17 +37,19 @@ export default function MenuPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* ── Page Header ───────────────────────────── */}
-      <div className="bg-primary text-white py-16 px-6 text-center">
-        <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-3">
-          Explore
-        </p>
-        <h1 className="text-4xl md:text-5xl font-bold">Our Full Menu</h1>
-        <p className="text-white/50 mt-4 text-sm max-w-md mx-auto leading-relaxed">
-          Handcrafted drinks and fresh bites — something for every mood.
-        </p>
+      <div className="bg-primary text-white py-16 text-center">
+        <Container>
+          <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-3">
+            Explore
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold">Our Full Menu</h1>
+          <p className="text-white/50 mt-4 text-sm max-w-md mx-auto leading-relaxed">
+            Handcrafted drinks and fresh bites — something for every mood.
+          </p>
+        </Container>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <Container className="py-14">
         {/* ── Search & Filters ──────────────────────── */}
         <div className="flex flex-col gap-6 mb-12">
           {/* Search input */}
@@ -155,7 +158,7 @@ export default function MenuPage() {
             </button>
           </div>
         )}
-      </div>
+      </Container>
     </div>
   );
 }

@@ -1,19 +1,22 @@
 import FadeIn from "@/components/FadeIn";
+import Container from "@/components/Container";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-6 bg-card">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-14 bg-card">
+      <Container>
         <FadeIn>
           <div className="text-center mb-16">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
               Find Us
             </p>
-            <h2 className="text-4xl font-bold text-primary">Contact & Location</h2>
+            <h2 className="text-4xl mb-8 font-bold text-primary">
+              Contact & Location
+            </h2>
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-4 items-start">
           <FadeIn direction="right" delay={0.1}>
             <div className="space-y-10">
               <div>
@@ -39,7 +42,9 @@ export default function ContactSection() {
                 <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-3">
                   Opening Hours
                 </h3>
-                <p className="text-text/60 text-sm">Open 24 hours · 7 days a week</p>
+                <p className="text-text/60 text-sm">
+                  Open 24 hours · 7 days a week
+                </p>
               </div>
 
               <div>
@@ -69,7 +74,7 @@ export default function ContactSection() {
             </div>
           </FadeIn>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
