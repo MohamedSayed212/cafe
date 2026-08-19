@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Container from "@/components/Container";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function AboutUs() {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="py-16 bg-background">
       <Container className="grid md:grid-cols-2 gap-16 items-center">
@@ -20,32 +24,31 @@ export default function AboutUs() {
         <FadeIn direction="right" delay={0.15}>
           <div>
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
-              Our Story
+              {t.about.eyebrow}
             </p>
             <h2 className="text-4xl font-bold text-primary mb-6 leading-tight">
-              A Passion for Coffee,
+              {t.about.titleLine1}
               <br />
-              Rooted in Cairo
+              {t.about.titleLine2}
             </h2>
             <p className="text-text/60 leading-relaxed mb-4">
-              terra was born from a simple belief — that great coffee deserves a
-              great space. Nestled in the heart of Heliopolis, we opened our
-              doors to bring specialty coffee culture to Cairo without losing
-              the warmth and hospitality Egypt is known for.
+              {t.about.paragraph1}
             </p>
             <p className="text-text/60 leading-relaxed mb-10">
-              Every bean is carefully sourced, every cup is brewed with
-              intention. Whether you're starting your morning or winding down
-              your evening, terra is your place.
+              {t.about.paragraph2}
             </p>
             <div className="flex gap-12">
               <div>
                 <p className="text-3xl font-bold text-primary">2018</p>
-                <p className="text-text/50 text-sm mt-1">Est. in Cairo</p>
+                <p className="text-text/50 text-sm mt-1">
+                  {t.about.statEstLabel}
+                </p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-primary">24</p>
-                <p className="text-text/50 text-sm mt-1">Drinks on the Menu</p>
+                <p className="text-text/50 text-sm mt-1">
+                  {t.about.statDrinksLabel}
+                </p>
               </div>
             </div>
           </div>

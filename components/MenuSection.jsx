@@ -1,14 +1,18 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
 import Container from "@/components/Container";
 import { products } from "@/data/products";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // Hand-picked preview — one from each category to show variety
 const PREVIEW_IDS = [1, 5, 8, 10, 13, 19];
 const preview = products.filter((p) => PREVIEW_IDS.includes(p.id));
 
 export default function MenuSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="menu" className="py-14 bg-background">
       <Container>
@@ -16,14 +20,13 @@ export default function MenuSection() {
         <FadeIn>
           <div className="text-center mb-14">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
-              A Taste of What We Offer
+              {t.menuSection.eyebrow}
             </p>
             <h2 className="text-4xl font-bold text-primary mb-4">
-              Menu Preview
+              {t.menuSection.title}
             </h2>
             <p className="text-text/50 text-sm leading-relaxed max-w-sm mx-auto">
-              A curated selection across our menu — coffee, iced drinks,
-              desserts, and fresh bakery.
+              {t.menuSection.subtitle}
             </p>
           </div>
         </FadeIn>
@@ -51,7 +54,7 @@ export default function MenuSection() {
                       {product.name}
                     </h3>
                     <span className="text-accent font-bold text-sm whitespace-nowrap">
-                      {product.price} EGP
+                      {product.price} {t.menuSection.currency}
                     </span>
                   </div>
                   <p className="text-text/55 text-xs leading-relaxed mb-3">
@@ -73,7 +76,7 @@ export default function MenuSection() {
               href="/menu"
               className="inline-block bg-primary text-white font-bold tracking-widest text-xs px-10 py-4 rounded-full hover:bg-primary/90 transition-colors"
             >
-              VIEW FULL MENU
+              {t.menuSection.cta}
             </Link>
           </div>
         </FadeIn>

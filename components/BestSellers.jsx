@@ -1,31 +1,37 @@
+"use client";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Container from "@/components/Container";
 import { products } from "@/data/products";
+import { useLanguage } from "@/components/LanguageProvider";
 
-// Pick featured drinks by ID and assign a tag
+// Pick featured drinks by ID and assign a translation key for the tag
 const FEATURED = [
-  { id: 2, tag: "Customer Favorite" },
-  { id: 4, tag: "Barista's Pick" },
-  { id: 7, tag: "House Specialty" },
-  { id: 10, tag: "Summer Special" },
+  { id: 2, tagKey: "favorite" },
+  { id: 4, tagKey: "barista" },
+  { id: 7, tagKey: "specialty" },
+  { id: 10, tagKey: "summer" },
 ];
 
-const featured = FEATURED.map(({ id, tag }) => ({
+const featured = FEATURED.map(({ id, tagKey }) => ({
   ...products.find((p) => p.id === id),
-  tag,
+  tagKey,
 }));
 
 export default function BestSellers() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-16 bg-primary">
       <Container>
         <FadeIn>
           <div className="text-center mb-10">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
-              What We Brew
+              {t.bestSellers.eyebrow}
             </p>
-            <h2 className="text-4xl font-bold text-white">Featured Drinks</h2>
+            <h2 className="text-4xl font-bold text-white">
+              {t.bestSellers.title}
+            </h2>
           </div>
         </FadeIn>
 
@@ -46,7 +52,7 @@ export default function BestSellers() {
                 {/* Info */}
                 <div className="p-5 flex flex-col flex-1">
                   <span className="text-accent text-[10px] font-bold tracking-widest uppercase mb-1">
-                    {drink.tag}
+                    {t.bestSellers.tags[drink.tagKey]}
                   </span>
                   <h3 className="text-white font-semibold text-lg mb-2">
                     {drink.name}
@@ -55,7 +61,7 @@ export default function BestSellers() {
                     {drink.description}
                   </p>
                   <p className="text-accent font-bold text-sm mt-4">
-                    {drink.price} EGP
+                    {drink.price} {t.bestSellers.currency}
                   </p>
                 </div>
               </div>

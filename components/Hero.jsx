@@ -1,8 +1,13 @@
+"use client"; // needed to read the shared language state
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Container from "@/components/Container";
+import { useLanguage } from "@/components/LanguageProvider";
+
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative bg-primary py-8 mt-[-10px] md:min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-black/60" />
@@ -12,22 +17,21 @@ export default function Hero() {
         <div className="text-white">
           <FadeIn delay={0}>
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-6 md:mb-5">
-              Specialty Coffee · Cairo, Egypt
+              {t.hero.eyebrow}
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-7 md:mb-6">
-              Where Every Cup
+              {t.hero.titleLine1}
               <br />
-              <span className="text-accent">Tells a Story</span>
+              <span className="text-accent">{t.hero.titleLine2}</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.3}>
             <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10 md:mb-10 max-w-md">
-              Handcrafted coffee, a warm atmosphere, and a corner of Cairo that
-              feels like home. Come as a stranger, leave as a regular.
+              {t.hero.subtitle}
             </p>
           </FadeIn>
 
@@ -37,13 +41,13 @@ export default function Hero() {
                 href="/menu"
                 className="bg-accent text-white font-bold tracking-widest text-xs px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
               >
-                VIEW MENU
+                {t.hero.viewMenu}
               </Link>
               <Link
                 href="#reservation"
                 className="border border-white/30 text-white font-bold tracking-widest text-xs px-8 py-4 rounded-full hover:bg-white/10 transition-colors"
               >
-                RESERVE A TABLE
+                {t.hero.reserve}
               </Link>
             </div>
           </FadeIn>
@@ -60,11 +64,11 @@ export default function Hero() {
                 className="object-cover"
               />
             </div>
-            {/* floating accent card */}
-            <div className="absolute -bottom-6 -left-6 bg-accent text-white rounded-2xl px-6 py-4 shadow-xl">
-              <p className="text-2xl font-bold">Est. 2018</p>
+            {/* floating accent card — mirrors to the other side in RTL */}
+            <div className="absolute -bottom-6 -left-6 rtl:left-auto rtl:-right-6 bg-accent text-white rounded-2xl px-6 py-4 shadow-xl">
+              <p className="text-2xl font-bold">{t.hero.est}</p>
               <p className="text-xs tracking-widest uppercase mt-1 text-white/80">
-                Serving Cairo
+                {t.hero.serving}
               </p>
             </div>
           </div>

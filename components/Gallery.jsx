@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Container from "@/components/Container";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const images = [
   {
@@ -29,6 +30,7 @@ const images = [
 ];
 
 export default function Gallery() {
+  const { t } = useLanguage();
   const [showAll, setShowAll] = useState(false);
 
   const visibleImages = showAll ? images : images.slice(0, 3);
@@ -39,10 +41,10 @@ export default function Gallery() {
         <FadeIn>
           <div className="text-center mb-14">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
-              Our Space
+              {t.gallery.eyebrow}
             </p>
             <h2 className="text-4xl font-bold text-primary">
-              A Glimpse Inside terra
+              {t.gallery.title}
             </h2>
           </div>
         </FadeIn>
@@ -68,14 +70,14 @@ export default function Gallery() {
               onClick={() => setShowAll(true)}
               className="bg-primary text-white font-bold tracking-widest text-xs px-10 py-4 rounded-full hover:bg-primary/90 transition-colors"
             >
-              SHOW MORE PHOTOS
+              {t.gallery.showMore}
             </button>
           ) : (
             <button
               onClick={() => setShowAll(false)}
               className="border border-primary text-primary font-bold tracking-widest text-xs px-10 py-4 rounded-full hover:bg-primary hover:text-white transition-colors"
             >
-              SHOW LESS PHOTOS
+              {t.gallery.showLess}
             </button>
           )}
         </div>

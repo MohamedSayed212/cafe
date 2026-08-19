@@ -1,14 +1,18 @@
+"use client";
 import Link from "next/link";
 import Container from "@/components/Container";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const links = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Menu", href: "/menu" },
-  { label: "Contact", href: "/contact" },
+  { key: "home", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "menu", href: "/menu" },
+  { key: "contact", href: "/contact" },
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-primary text-white py-14">
       <Container>
@@ -16,23 +20,22 @@ export default function Footer() {
           <div>
             <p className="text-xl font-bold tracking-widest mb-4">terra</p>
             <p className="text-white/45 text-sm leading-relaxed max-w-xs">
-              Specialty coffee rooted in Cairo. A space to slow down, sip well,
-              and stay a while.
+              {t.footer.tagline}
             </p>
           </div>
 
           <div>
             <p className="text-accent text-xs font-bold tracking-widest uppercase mb-5">
-              Quick Links
+              {t.footer.quickLinks}
             </p>
             <ul className="space-y-2">
               {links.map((l) => (
-                <li key={l.label}>
+                <li key={l.key}>
                   <Link
                     href={l.href}
                     className="text-white/50 text-sm hover:text-accent transition-colors"
                   >
-                    {l.label}
+                    {t.footer.links[l.key]}
                   </Link>
                 </li>
               ))}
@@ -41,23 +44,23 @@ export default function Footer() {
 
           <div>
             <p className="text-accent text-xs font-bold tracking-widest uppercase mb-5">
-              Opening Hours
+              {t.footer.hoursTitle}
             </p>
             <div className="text-white/50 text-sm mb-6">
-              <p>Open 24 hours · 7 days a week</p>
+              <p>{t.footer.hoursValue}</p>
             </div>
             <p className="text-accent text-xs font-bold tracking-widest uppercase mb-3">
-              Location
+              {t.footer.locationTitle}
             </p>
             <div className="text-white/50 text-sm space-y-1">
-              <p>15 El-Nozha St, Heliopolis</p>
-              <p>Cairo, Egypt</p>
+              <p>{t.footer.addressLine1}</p>
+              <p>{t.footer.addressLine2}</p>
             </div>
           </div>
         </div>
 
         <div className="pt-8 text-center text-white/25 text-xs tracking-widest">
-          © {new Date().getFullYear()} terra. All rights reserved.
+          © {new Date().getFullYear()} {t.footer.rights}
         </div>
       </Container>
     </footer>

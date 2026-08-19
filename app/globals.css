@@ -8,6 +8,13 @@
   --color-card: #ffffff;
 }
 
+/* Arabic script reads smaller than Latin at the same font-size, so nudge the
+   root size up when the site is in Arabic — every rem-based Tailwind class
+   (text-sm, text-4xl, spacing…) scales with it automatically. */
+html[lang="ar"] {
+  font-size: 17.5px;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 68px; /* offset for sticky navbar */

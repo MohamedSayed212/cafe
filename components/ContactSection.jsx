@@ -1,17 +1,21 @@
+"use client";
 import FadeIn from "@/components/FadeIn";
 import Container from "@/components/Container";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="py-14 bg-card">
       <Container>
         <FadeIn>
           <div className="text-center mb-16">
             <p className="text-accent tracking-[0.3em] text-xs font-semibold uppercase mb-4">
-              Find Us
+              {t.contact.eyebrow}
             </p>
             <h2 className="text-4xl mb-8 font-bold text-primary">
-              Contact & Location
+              {t.contact.title}
             </h2>
           </div>
         </FadeIn>
@@ -21,12 +25,12 @@ export default function ContactSection() {
             <div className="space-y-10">
               <div>
                 <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-3">
-                  Address
+                  {t.contact.addressTitle}
                 </h3>
                 <p className="text-text/60 text-sm leading-relaxed">
-                  15 El-Nozha Street, Heliopolis
+                  {t.contact.addressLine1}
                   <br />
-                  Cairo, Egypt
+                  {t.contact.addressLine2}
                 </p>
                 <a
                   href="https://maps.google.com"
@@ -34,24 +38,23 @@ export default function ContactSection() {
                   rel="noopener noreferrer"
                   className="inline-block mt-3 text-accent text-xs font-bold tracking-widest uppercase hover:underline"
                 >
-                  Get Directions →
+                  {t.contact.directions}
                 </a>
               </div>
 
               <div>
                 <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-3">
-                  Opening Hours
+                  {t.contact.hoursTitle}
                 </h3>
-                <p className="text-text/60 text-sm">
-                  Open 24 hours · 7 days a week
-                </p>
+                <p className="text-text/60 text-sm">{t.contact.hoursValue}</p>
               </div>
 
               <div>
                 <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-3">
-                  Get in Touch
+                  {t.contact.touchTitle}
                 </h3>
-                <div className="text-text/60 text-sm space-y-1">
+                {/* Contact details stay in Latin digits on purpose — they are dialable */}
+                <div className="text-text/60 text-sm space-y-1" dir="ltr">
                   <p>+20 100 123 4567</p>
                   <p>hello@terra.com</p>
                 </div>

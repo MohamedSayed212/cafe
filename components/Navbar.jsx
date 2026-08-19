@@ -3,18 +3,90 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Container from "@/components/Container";
+import { Globe, ChevronDown, Check } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
+// Labels now come from the dictionary — only the href/section stay here.
 const navLinks = [
-  { label: "HOME", href: "/", section: "home" },
-  { label: "ABOUT", href: "/#about", section: "about" },
-  { label: "MENU", href: "/#menu", section: "menu" },
-  { label: "CONTACT", href: "/#contact", section: "contact" },
+  { key: "home", href: "/", section: "home" },
+  { key: "about", href: "/#about", section: "about" },
+  { key: "menu", href: "/#menu", section: "menu" },
+  { key: "contact", href: "/#contact", section: "contact" },
 ];
 
 const SECTION_IDS = ["about", "menu", "gallery", "reservation", "contact"];
 
+// Language options shown in the dropdown
+const LANGUAGES = [
+  { code: "en", short: "EN", label: "English" },
+  { code: "ar", short: "AR", label: "العربية" },
+];
+
+// Clickable language button that opens a small dropdown menu
+function LangToggle({ lang, setLang }) {
+  const [open, setOpen] = useState(false);
+  const current = LANGUAGES.find((l) => l.code === lang);
+
+  const select = (code) => {
+    setLang(code);
+    setOpen(false);
+  };
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="Switch language"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex items-center gap-1.5 border border-white/30 rounded-full px-3 py-1.5 text-[11px] font-bold tracking-widest hover:border-accent transition-colors"
+      >
+        <Globe className="w-3.5 h-3.5" strokeWidth={2} />
+        {current.short}
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          strokeWidth={2.5}
+        />
+      </button>
+
+      {open && (
+        <>
+          {/* Invisible layer — clicking anywhere outside closes the dropdown */}
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+
+          <ul
+            role="listbox"
+            className="absolute top-full end-0 mt-2 z-50 w-36 bg-[#faf8f4] border border-accent/30 rounded-xl shadow-xl overflow-hidden py-1"
+          >
+            {LANGUAGES.map((l) => (
+              <li key={l.code}>
+                <button
+                  role="option"
+                  aria-selected={lang === l.code}
+                  onClick={() => select(l.code)}
+                  className={`w-full flex items-center justify-between gap-2 px-4 py-2.5 text-xs font-bold tracking-wide text-start transition-colors ${
+                    lang === l.code
+                      ? "text-accent bg-accent/10"
+                      : "text-primary hover:bg-primary/5"
+                  }`}
+                >
+                  {l.label}
+                  {lang === l.code && (
+                    <Check className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={3} />
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
+  const { lang, setLang, t } = useLanguage();
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -85,43 +157,49 @@ export default function Navbar() {
         {/* Desktop links */}
         <ul className="hidden md:flex items-center justify-center gap-8 text-xs font-semibold tracking-widest">
           {navLinks.map((link) => (
-            <li key={link.label}>
+            <li key={link.key}>
               <Link
                 href={link.href}
                 onClick={(e) => handleClick(e, link.section)}
                 className={`transition-colors hover:text-accent ${isActive(link.section) ? "text-accent" : ""}`}
               >
-                {link.label}
+                {t.nav[link.key]}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Desktop CTA */}
-        <Link
-          href="/#reservation"
-          onClick={(e) => handleClick(e, "reservation")}
-          className="hidden md:block justify-self-end bg-accent text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full hover:opacity-90 transition-opacity"
-        >
-          RESERVE A TABLE
-        </Link>
+        {/* Desktop language toggle + CTA */}
+        <div className="hidden md:flex items-center justify-end gap-4">
+          <LangToggle lang={lang} setLang={setLang} />
+          <Link
+            href="/#reservation"
+            onClick={(e) => handleClick(e, "reservation")}
+            className="bg-accent text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full hover:opacity-90 transition-opacity whitespace-nowrap"
+          >
+            {t.nav.reserve}
+          </Link>
+        </div>
 
-        {/* Hamburger button */}
-        <button
-          onClick={() => setMenuOpen((prev) => !prev)}
-          className="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 ml-auto"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
-          />
-        </button>
+        {/* Mobile: language toggle sits next to the hamburger */}
+        <div className="md:hidden flex items-center gap-3 ms-auto">
+          <LangToggle lang={lang} setLang={setLang} />
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="flex flex-col justify-center items-center gap-[5px] w-8 h-8"
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
+            />
+          </button>
+        </div>
       </Container>
 
       {/* Mobile menu — absolute so it overlays content instead of pushing it down */}
@@ -130,12 +208,12 @@ export default function Navbar() {
           <Container className="flex flex-col gap-5">
             {navLinks.map((link) => (
               <Link
-                key={link.label}
+                key={link.key}
                 href={link.href}
                 onClick={(e) => handleClick(e, link.section)}
                 className={`text-sm font-bold tracking-widest transition-colors ${isActive(link.section) ? "text-accent" : "text-primary hover:text-accent"}`}
               >
-                {link.label}
+                {t.nav[link.key]}
               </Link>
             ))}
             <Link
@@ -143,7 +221,7 @@ export default function Navbar() {
               onClick={(e) => handleClick(e, "reservation")}
               className="mt-1 bg-primary text-white text-xs font-bold tracking-widest px-6 py-3 rounded-full text-center hover:bg-primary/90 transition-colors"
             >
-              RESERVE A TABLE
+              {t.nav.reserve}
             </Link>
           </Container>
         </div>
